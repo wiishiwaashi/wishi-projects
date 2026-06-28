@@ -38,37 +38,42 @@ const projects = [
   {
     title: "Katha: The Network for Tech Work",
     description: "A full-stack e-commerce solution with real-time inventory management, payment processing, and personalized recommendations.",
-    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80",
-    tech: ["React", "Node.js", "PostgreSQL", "Stripe"],
+    image: "images/project-photos/katha-photos/katha-main-photo.png",
+    tech: ["React", "FastAPI", "PostgreSQL", "Railway", "Vercel"],
     color: "from-blue-500 to-purple-600",
+    projectLink: "https://v0-katha-delta.vercel.app"
   },
   {
     title: "Cybersecurity Triage Data Generation & Analysis",
     description: "A collaborative task management application with team boards, real-time updates, and productivity analytics.",
     image: "images/project-photos/eif-photos/eif-main-photo.png",
-    tech: ["TypeScript", "Next.js", "MongoDB", "Socket.io"],
+    tech: ["Python", "Pandas", "Matplotlib", "Numpy", "Seaborn", "Tableau"],
     color: "from-pink-500 to-orange-500",
+    projectLink: "#"
   },
   {
     title: "Bomberman Game Dupe",
     description: "To try my hand in game dev, and as a pro",
     image: "images/project-photos/bomberman-photos/bomberman-main-photo.png",
-    tech: ["React", "OpenAI API", "Firebase"],
+    tech: ["Java"],
     color: "from-blue-500 to-purple-600",
+    projectLink: "#"
   },
   {
     title: "Aguhon: AI Disaster Management Assistant",
     description: "Interactive weather dashboard with detailed forecasts, interactive maps, and severe weather alerts.",
     image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80",
-    tech: ["Vue.js", "D3.js", "Weather API", "Mapbox"],
+    tech: ["React", "Next.js"],
     color: "from-pink-500 to-orange-500",
+    projectLink: "https://aguhon-disaster-intelligence.vercel.app"
   },
   {
     title: "Fuse",
     description: "Interactive weather dashboard with detailed forecasts, interactive maps, and severe weather alerts.",
     image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80",
-    tech: ["Vue.js", "D3.js", "Weather API", "Mapbox"],
+    tech: ["React", "Next.js"],
     color: "from-pink-500 to-orange-500",
+    projectLink: "https://fuse-alpha.vercel.app"
   },
 ];
 
@@ -287,7 +292,7 @@ function Projects() {
                     </div>
                   </div>
                   <div className="flex gap-4 pt-6">
-                    <a href="#" className="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors text-sm">
+                    <a href={p.projectLink} className="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors text-sm">
                       <ExternalLink className="w-4 h-4" /> Live Demo
                     </a>
                     <a href="#" className="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors text-sm">
@@ -306,7 +311,7 @@ function Projects() {
 
 function Experiences() {
   return (
-    <section id="experiences" className="min-h-screen py-20 px-8 backdrop-blur-md">
+    <section id="experiences" className="min-h-[92vh] py-20 px-8 backdrop-blur-md">
       <div className="max-w-7xl mx-auto">
         <FadeIn className="mb-12 text-center">
           <h2 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-pink-400 mb-4 font-press-start-2p">My Journey</h2>
@@ -316,7 +321,7 @@ function Experiences() {
           <div className="flex gap-8 min-w-max px-4 py-8 -my-6 pt-15 -mt-10">
             {experiences.map((e, i) => (
               <FadeIn key={e.company} delay={i * 100}>
-                <div className={`w-96 h-[480px] rounded-2xl bg-gradient-to-br ${e.color} shadow-2xl hover:scale-105 transition-transform duration-300 p-8 text-white flex flex-col justify-between`}>
+                <div className={`w-96 h-[400px] rounded-2xl bg-gradient-to-br ${e.color} shadow-2xl hover:scale-105 transition-transform duration-300 p-8 text-white flex flex-col justify-between`}>
                   <div className="space-y-4">
                     <div className="flex items-center gap-2 text-white/80 text-sm"><Building2 className="w-4 h-4" /> {e.company}</div>
                     <h3 className="text-2xl font-bold">{e.role}</h3>
