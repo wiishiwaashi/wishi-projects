@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 
 import Typewriter from "@/components/Typewriter";
+import {BubbleBackground} from "@/components/AnimatedBackground"
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
@@ -24,41 +25,46 @@ const photos = [
   "/images/self-carousel/photo-of-me-4.jpg"
 ];
 
-const interests = ["building cool stuff", "designing experiences", "solving problems", "learning new things", "creating impact"];
+const interests = ["building software", "analyzing data", "playing video games", "learning new things", "creating impact"];
 
 const contacts = [
-  { icon: Globe, label: "LinkedIn", url: "https://linkedin.com", color: "bg-blue-600" },
-  { icon: Globe, label: "GitHub", url: "https://github.com", color: "bg-gray-800" },
-  { icon: Mail, label: "Email", url: "mailto:ishi@example.com", color: "bg-red-500" },
-  { icon: Globe, label: "Twitter", url: "https://twitter.com", color: "bg-sky-500" },
-  { icon: FileText, label: "Resume", url: "#", color: "bg-green-600" },
-  { icon: MessageCircle, label: "Discord", url: "#", color: "bg-indigo-600" },
+  { isCustomLogo: true, logoPath: "/logos/linkedin-logo.svg", label: "LinkedIn", url: "https://linkedin.com", color: "bg-blue-600" },
+  { isCustomLogo: true, logoPath: "/logos/github-logo.svg", label: "GitHub", url: "https://github.com", color: "bg-gray-800" },
+  { isCustomLogo: false, icon: Mail, label: "Email", url: "mailto:ishi@example.com", color: "bg-red-500" },
+  { isCustomLogo: false, icon: FileText, label: "Resume", url: "#", color: "bg-green-600" },
 ];
 
 const projects = [
   {
-    title: "E-Commerce Platform",
+    title: "Katha: The Network for Tech Work",
     description: "A full-stack e-commerce solution with real-time inventory management, payment processing, and personalized recommendations.",
     image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80",
     tech: ["React", "Node.js", "PostgreSQL", "Stripe"],
     color: "from-blue-500 to-purple-600",
   },
   {
-    title: "Task Management App",
+    title: "Cybersecurity Triage Data Generation & Analysis",
     description: "A collaborative task management application with team boards, real-time updates, and productivity analytics.",
-    image: "https://images.unsplash.com/photo-1581287053822-fd7bf4f4bfec?w=800&q=80",
+    image: "images/project-photos/eif-photos/eif-main-photo.png",
     tech: ["TypeScript", "Next.js", "MongoDB", "Socket.io"],
     color: "from-pink-500 to-orange-500",
   },
   {
-    title: "Portfolio Generator",
-    description: "An AI-powered portfolio website generator that creates personalized, responsive portfolios based on user input.",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
+    title: "Bomberman Game Dupe",
+    description: "To try my hand in game dev, and as a pro",
+    image: "images/project-photos/bomberman-photos/bomberman-main-photo.png",
     tech: ["React", "OpenAI API", "Firebase"],
     color: "from-blue-500 to-purple-600",
   },
   {
-    title: "Weather Dashboard",
+    title: "Aguhon: AI Disaster Management Assistant",
+    description: "Interactive weather dashboard with detailed forecasts, interactive maps, and severe weather alerts.",
+    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80",
+    tech: ["Vue.js", "D3.js", "Weather API", "Mapbox"],
+    color: "from-pink-500 to-orange-500",
+  },
+  {
+    title: "Fuse",
     description: "Interactive weather dashboard with detailed forecasts, interactive maps, and severe weather alerts.",
     image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80",
     tech: ["Vue.js", "D3.js", "Weather API", "Mapbox"],
@@ -143,11 +149,11 @@ function ScrollPrompt({ text, targetId, dark = true }: { text: string; targetId:
   return (
     <div
       onClick={() => scrollTo(targetId)}
-      className={`h-[10vh] flex items-center justify-center cursor-pointer select-none ${dark ? "bg-slate-900 text-purple-300" : "bg-slate-50 text-slate-500"}`}
+      className={`h-[8vh] flex items-center justify-center cursor-pointer select-none backdrop-blur-md bg-slate-950/20 hover:bg-slate-950/30 text-white`}
     >
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-row items-center gap-2">
         <span className="text-sm">{text}</span>
-        <ChevronDown className="w-6 h-6 animate-bounce" />
+        <ChevronDown className="w-6 h-6 animate-bounce translate-y-[4px]" />
       </div>
     </div>
   );
@@ -179,27 +185,28 @@ function Hero() {
   }, []);
 
   return (
-    <section className="min-h-[90vh] bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 text-white flex items-center justify-center p-8 overflow-hidden">
+    <section className="min-h-[92vh] text-white flex items-center justify-center p-8 overflow-hidden backdrop-blur-md">
       <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
 
         {/* Intro */}
         <div 
-          className="flex flex-col justify-center space-y-6 transition-all duration-1000 ease-out"
+          className="flex flex-col justify-center space-y-6 transition-all duration-1000 ease-out max-w-md"
           style={{ opacity: loaded ? 1 : 0, transform: loaded ? "translateX(0)" : "translateX(-40px)" }}
         >
-          <h1 className="text-4xl lg:text-5xl leading-tight">
-            I am <span className="font-bold bg-clip-text text-blue-400">Ishi</span>, and I like{" "}
-            <span className="inline min-w-[280px] relative align-bottom">
+          <h1 className="text-4xl lg:text-4.5xl leading-tight font-press-start-2p break-words">
+            I'm <span className="font-bold bg-clip-text text-purple-400">Ishi</span>, and I like{" "}
+            <span className="inline-block relative align-bottom">
               <Typewriter
                 words = {interests}
                 typingSpeed = {80}
                 deletingSpeed = {40}
                 pauseDuration={2000}
+                textColor = "text-purple-400"
               />
             </span>
           </h1>
-          <p className="text-lg text-purple-200 leading-relaxed">
-            I am a passionate developer and creative thinker who loves crafting beautiful, functional experiences.
+          <p className="text-lg text-purple-200 leading-relaxed font-inter-sans">
+            I am a current CS student focused on web development and data science who loves to play sports on the side!
           </p>
         </div>
 
@@ -218,7 +225,7 @@ function Hero() {
                 style={{ opacity: i === photo ? 1 : 0, zIndex: i === photo ? 1 : 0 }}
               />
             ))}
-            <div className="absolute -bottom-4 -right-4 bg-white/10 backdrop-blur-md rounded-full p-4 z-10">
+            <div className="absolute -bottom-4 -right-4 bg-white/10 rounded-full p-4 z-10">
               <div className="flex gap-2">
                 {photos.map((_, i) => (
                   <button 
@@ -237,13 +244,17 @@ function Hero() {
           className="flex flex-col justify-center transition-all duration-1000 delay-400 ease-out"
           style={{ opacity: loaded ? 1 : 0, transform: loaded ? "translateX(0)" : "translateX(40px)" }}
         >
-          <h2 className="text-2xl mb-6 font-bold"> Let's connect! </h2>
+          <h2 className="text-2xl mb-6 font-bold font-press-start-2p"> Let's connect! </h2>
           <div className="grid grid-cols-2 gap-4">
             {contacts.map((c) => (
               <a key={c.label} href={c.url} target="_blank" rel="noopener noreferrer"
                 className={`${c.color} rounded-xl p-6 flex flex-col items-center gap-3 text-white hover:scale-105 hover:rotate-1 active:scale-95 transition-transform duration-200 shadow-lg`}
               >
-                <c.icon className="w-8 h-8" />
+                {c.isCustomLogo ? (
+                  <img src={c.logoPath} alt={c.label} className="w-8 h-8 object-contain" />
+                ) : (
+                  c.icon && <c.icon className="w-8 h-8" />
+                )}
                 <span className="text-sm font-medium">{c.label}</span>
               </a>
             ))}
@@ -256,11 +267,11 @@ function Hero() {
 
 function Projects() {
   return (
-    <section id="projects" className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 py-20 px-8">
+    <section id="projects" className="min-h-screen py-20 px-8 backdrop-blur-md">
       <div className="max-w-6xl mx-auto">
         <FadeIn className="mb-16 text-center">
-          <h2 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-4">my projects</h2>
-          <p className="text-slate-600 text-lg">{"A collection of things I've built and shipped"}</p>
+          <h2 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-pink-400 pb-4 mb-4 font-press-start-2p">My Projects</h2>
+          <p className="text-white-600 text-lg">{"A collection of things I've built and shipped"}</p>
         </FadeIn>
         <div className="space-y-12">
           {projects.map((p, i) => (
@@ -295,14 +306,14 @@ function Projects() {
 
 function Experiences() {
   return (
-    <section id="experiences" className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-20 px-8">
+    <section id="experiences" className="min-h-screen py-20 px-8 backdrop-blur-md">
       <div className="max-w-7xl mx-auto">
         <FadeIn className="mb-12 text-center">
-          <h2 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-pink-400 mb-4">my journey</h2>
-          <p className="text-purple-300 text-lg">Scroll horizontally to explore my experiences</p>
+          <h2 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-pink-400 mb-4 font-press-start-2p">My Journey</h2>
+          <p className="text-purple-300 text-lg">Scroll to explore my experiences</p>
         </FadeIn>
         <div className="overflow-x-auto pb-8" style={{ scrollbarWidth: "thin" }}>
-          <div className="flex gap-8 min-w-max px-4">
+          <div className="flex gap-8 min-w-max px-4 py-8 -my-6 pt-15 -mt-10">
             {experiences.map((e, i) => (
               <FadeIn key={e.company} delay={i * 100}>
                 <div className={`w-96 h-[480px] rounded-2xl bg-gradient-to-br ${e.color} shadow-2xl hover:scale-105 transition-transform duration-300 p-8 text-white flex flex-col justify-between`}>
@@ -330,11 +341,11 @@ function Experiences() {
 
 function Skills() {
   return (
-    <section id="skills" className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-pink-50 py-20 px-8">
+    <section id="skills" className="min-h-screen py-20 px-8 backdrop-blur-md">
       <div className="max-w-7xl mx-auto">
         <FadeIn className="mb-16 text-center">
-          <h2 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-pink-600 mb-4">skills & expertise</h2>
-          <p className="text-slate-600 text-lg">Technologies and tools I work with</p>
+          <h2 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 to-pink-600 mb-4 font-press-start-2p">Skills & Expertise</h2>
+          <p className="text-white-600 text-lg">My tech stack and other tools!</p>
         </FadeIn>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skills.map((cat, i) => (
@@ -358,14 +369,15 @@ function Skills() {
 export default function App() {
   return (
     <div className="overflow-x-hidden">
+      <BubbleBackground />
       <Hero />
-      <ScrollPrompt text="scroll to see my projects" targetId="projects" dark />
+      <ScrollPrompt text="scroll to see my projects" targetId="projects"/>
       <Projects />
-      <ScrollPrompt text="explore my experiences" targetId="experiences" dark={false} />
+      <ScrollPrompt text="explore my experiences" targetId="experiences"/>
       <Experiences />
-      <ScrollPrompt text="check out my skills" targetId="skills" dark />
+      <ScrollPrompt text="check out my skills" targetId="skills"/>
       <Skills />
-      <footer className="bg-gradient-to-r from-slate-900 to-purple-900 text-white py-12 text-center">
+      <footer className="text-white py-12 text-center backdrop-blur-md bg-slate-950/20">
         <p className="text-xl mb-2">Thanks for stopping by!</p>
         <p className="text-purple-300 text-sm">Built with React, TailwindCSS • © 2026 Ishi</p>
       </footer>

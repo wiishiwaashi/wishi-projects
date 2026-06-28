@@ -7,6 +7,7 @@ interface TypewriterProps {
   typingSpeed?: number;
   deletingSpeed?: number;
   pauseDuration?: number;
+  textColor?: string;
 }
 
 export default function Typewriter({
@@ -14,6 +15,7 @@ export default function Typewriter({
   typingSpeed = 150,
   deletingSpeed = 100,
   pauseDuration = 2000,
+  textColor = "text-blue-400",
 }: TypewriterProps) {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
@@ -46,7 +48,7 @@ export default function Typewriter({
   }, [currentText, isDeleting, currentWordIndex, words, typingSpeed, deletingSpeed, pauseDuration]);
 
   return (
-    <span className="font-bold bg-clip-text text-blue-400">
+    <span className={`font-bold bg-clip-text ${textColor}`}>
       {currentText}
     </span>
   );
