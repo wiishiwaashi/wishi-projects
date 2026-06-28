@@ -18,9 +18,10 @@ import Typewriter from "@/components/Typewriter";
 // ── Data ──────────────────────────────────────────────────────────────────────
 
 const photos = [
-  "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80",
-  "https://images.unsplash.com/photo-1535957998253-26ae1ef29506?w=800&q=80",
-  "https://images.unsplash.com/photo-1629185752040-57f6fa9b4f53?w=800&q=80",
+  "/images/self-carousel/photo-of-me-1.jpg",
+  "/images/self-carousel/photo-of-me-2.JPG",
+  "/images/self-carousel/photo-of-me-3.jpg",
+  "/images/self-carousel/photo-of-me-4.jpg"
 ];
 
 const interests = ["building cool stuff", "designing experiences", "solving problems", "learning new things", "creating impact"];
@@ -67,37 +68,37 @@ const projects = [
 
 const experiences = [
   {
-    company: "Tech Innovations Inc.",
-    role: "Senior Frontend Developer",
-    period: "Jan 2024 – Present",
-    location: "San Francisco, CA",
+    company: "De La Salle University College of Computer Studies - Center for Language Technologies",
+    role: "Natural Language Processing Intern",
+    period: "June 2023 – July 2023",
+    location: "Taft, Manila",
     description: "Leading the frontend architecture team, implementing cutting-edge React solutions and mentoring junior developers.",
     skills: ["React", "TypeScript", "GraphQL", "AWS"],
     color: "from-emerald-500 to-teal-600",
   },
   {
-    company: "StartupXYZ",
-    role: "Full Stack Developer",
-    period: "Jun 2022 – Dec 2023",
+    company: "Eskwelabs Cohort 9",
+    role: "Data Modeling Fellow",
+    period: "Feb 2026– Present",
     location: "Remote",
     description: "Built and scaled the core product from MVP to 100K+ users. Implemented real-time features and payment systems.",
     skills: ["Node.js", "React", "MongoDB", "Redis"],
     color: "from-blue-500 to-indigo-600",
   },
   {
-    company: "Design Studio Co.",
+    company: "Boxhive Digital Solutions",
     role: "Frontend Developer Intern",
-    period: "Jan 2022 – May 2022",
-    location: "New York, NY",
+    period: "June 2026 – Present",
+    location: "Remote",
     description: "Developed responsive web applications for client projects. Contributed to the company component library.",
     skills: ["HTML", "CSS", "JavaScript", "Figma"],
     color: "from-purple-500 to-pink-600",
   },
   {
-    company: "University Research Lab",
-    role: "Research Assistant",
-    period: "Sep 2020 – Dec 2021",
-    location: "Boston, MA",
+    company: "KadaKareer",
+    role: "Product Engineering Junior Mission Specialist",
+    period: "June 2026 – Present",
+    location: "Remote",
     description: "Conducted research on web accessibility and developed tools to improve user experience for people with disabilities.",
     skills: ["Python", "Data Analysis", "UX Research"],
     color: "from-orange-500 to-red-600",
@@ -236,7 +237,7 @@ function Hero() {
           className="flex flex-col justify-center transition-all duration-1000 delay-400 ease-out"
           style={{ opacity: loaded ? 1 : 0, transform: loaded ? "translateX(0)" : "translateX(40px)" }}
         >
-          <h2 className="text-2xl mb-6 font-bold">{"let's connect"}</h2>
+          <h2 className="text-2xl mb-6 font-bold"> Let's connect! </h2>
           <div className="grid grid-cols-2 gap-4">
             {contacts.map((c) => (
               <a key={c.label} href={c.url} target="_blank" rel="noopener noreferrer"
@@ -264,7 +265,7 @@ function Projects() {
         <div className="space-y-12">
           {projects.map((p, i) => (
             <FadeIn key={p.title} delay={i * 100}>
-              <div className={`rounded-2xl overflow-hidden shadow-xl min-h-[45vh] bg-gradient-to-r ${p.color} grid md:grid-cols-2 ${i % 2 !== 0 ? "md:[&>*:first-child]:order-2" : ""}`}>
+              <div className={`rounded-2xl overflow-hidden shadow-xl md:h-[350px] bg-gradient-to-r ${p.color} grid md:grid-cols-2 ${i % 2 !== 0 ? "md:[&>*:first-child]:order-2" : ""}`}>
                 <img src={p.image} alt={p.title} className="w-full h-full object-cover min-h-[250px]" />
                 <div className="p-8 text-white flex flex-col justify-between">
                   <div className="space-y-4">
