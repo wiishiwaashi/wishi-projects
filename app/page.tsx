@@ -10,8 +10,10 @@ import {
   Building2, 
   Calendar, 
   MapPin,
-  Globe 
+  Globe
 } from "lucide-react";
+
+import Typewriter from "@/components/Typewriter";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
@@ -167,14 +169,12 @@ function FadeIn({ children, className = "", delay = 0 }: { children: React.React
 
 function Hero() {
   const [photo, setPhoto] = useState(0);
-  const [interest, setInterest] = useState(0);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     setLoaded(true); // Triggers clean initial load transitions
     const t1 = setInterval(() => setPhoto(p => (p + 1) % photos.length), 3000);
-    const t2 = setInterval(() => setInterest(p => (p + 1) % interests.length), 2500);
-    return () => { clearInterval(t1); clearInterval(t2); };
+    return () => { clearInterval(t1);};
   }, []);
 
   return (
@@ -186,20 +186,19 @@ function Hero() {
           className="flex flex-col justify-center space-y-6 transition-all duration-1000 ease-out"
           style={{ opacity: loaded ? 1 : 0, transform: loaded ? "translateX(0)" : "translateX(-40px)" }}
         >
-          <h1 className="text-4xl lg:text-5xl">
-            i am <span className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-pink-400">ishi</span>, and i like{" "}
-            <span className="inline-block min-w-[280px] h-[1.3em] relative align-bottom overflow-hidden">
-              <span
-                key={interest}
-                className="absolute left-0 font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-400 transition-all duration-500 ease-out"
-                style={{ transform: "translateY(0)" }}
-              >
-                {interests[interest]}
-              </span>
+          <h1 className="text-4xl lg:text-5xl leading-tight">
+            I am <span className="font-bold bg-clip-text text-blue-400">Ishi</span>, and I like{" "}
+            <span className="inline min-w-[280px] relative align-bottom">
+              <Typewriter
+                words = {interests}
+                typingSpeed = {80}
+                deletingSpeed = {40}
+                pauseDuration={2000}
+              />
             </span>
           </h1>
           <p className="text-lg text-purple-200 leading-relaxed">
-            passionate developer and creative thinker who loves crafting beautiful, functional experiences.
+            I am a passionate developer and creative thinker who loves crafting beautiful, functional experiences.
           </p>
         </div>
 
@@ -354,8 +353,6 @@ function Skills() {
     </section>
   );
 }
-
-// ── App ───────────────────────────────────────────────────────────────────────
 
 export default function App() {
   return (
