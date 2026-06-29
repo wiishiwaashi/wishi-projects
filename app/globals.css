@@ -13,6 +13,7 @@
   --font-poppins-sans: var(--font-poppins-sans), sans-serif;
   --font-press-start-2p: var(--font-press-start-2p), sans-serif;
   --font-inter-sans: var(--font-inter-sans), sans-serif;
+  --font-bebas-neue: var(--font-bebas-neue), sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -15,7 +15,7 @@ class Bubble {
 
   constructor(ctx: CanvasRenderingContext2D, canvasWidth: number, canvasHeight: number) {
     this.ctx = ctx;
-    this.radius = Math.random() * 60 + 10; // Bubble radius between 5 and 20
+    this.radius = Math.random() * 80 + 10; // Bubble radius between 5 and 20
     this.x = Math.random() * canvasWidth;
     // Start bubbles just below the screen so they float up initially
     this.y = canvasHeight + Math.random() * 100; 

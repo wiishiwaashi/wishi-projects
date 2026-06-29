@@ -22,25 +22,25 @@ const photos = [
   "/images/self-carousel/photo-of-me-1.jpg",
   "/images/self-carousel/photo-of-me-2.JPG",
   "/images/self-carousel/photo-of-me-3.jpg",
-  "/images/self-carousel/photo-of-me-4.jpg"
+  "/images/self-carousel/photo-of-me-4.jpg",
 ];
 
 const interests = ["building software", "analyzing data", "playing video games", "learning new things", "creating impact"];
 
 const contacts = [
-  { isCustomLogo: true, logoPath: "/logos/linkedin-logo.svg", label: "LinkedIn", url: "https://linkedin.com", color: "bg-blue-600" },
-  { isCustomLogo: true, logoPath: "/logos/github-logo.svg", label: "GitHub", url: "https://github.com", color: "bg-gray-800" },
-  { isCustomLogo: false, icon: Mail, label: "Email", url: "mailto:ishi@example.com", color: "bg-red-500" },
-  { isCustomLogo: false, icon: FileText, label: "Resume", url: "#", color: "bg-green-600" },
+  { isCustomLogo: true, logoPath: "/logos/linkedin-logo.svg", label: "LinkedIn", url: "https://linkedin.com/in/reysheildoromal", color: "bg-blue-800" },
+  { isCustomLogo: true, logoPath: "/logos/github-logo.svg", label: "GitHub", url: "https://github.com/wiishiwaashi", color: "bg-gray-800" },
+  { isCustomLogo: false, icon: Mail, label: "Email", url: "mailto:ishi@example.com", color: "bg-red-800" },
+  { isCustomLogo: false, icon: FileText, label: "Resume", url: "#", color: "bg-green-800" },
 ];
 
 const projects = [
   {
     title: "Katha: The Network for Tech Work",
-    description: "A full-stack e-commerce solution with real-time inventory management, payment processing, and personalized recommendations.",
+    description: "A B2B/B2C marketplace for tech services in the Philippines, including 3D Printing, Laser, and CAD.",
     image: "images/project-photos/katha-photos/katha-main-photo.png",
     tech: ["React", "FastAPI", "PostgreSQL", "Railway", "Vercel"],
-    color: "from-blue-500 to-purple-600",
+    color: "from-neutral-400 to-slate-900",
     projectLink: "https://v0-katha-delta.vercel.app"
   },
   {
@@ -48,20 +48,20 @@ const projects = [
     description: "A collaborative task management application with team boards, real-time updates, and productivity analytics.",
     image: "images/project-photos/eif-photos/eif-main-photo.png",
     tech: ["Python", "Pandas", "Matplotlib", "Numpy", "Seaborn", "Tableau"],
-    color: "from-pink-500 to-orange-500",
+    color: "from-slate-900 to-neutral-400",
     projectLink: "#"
   },
   {
     title: "Bomberman Game Dupe",
-    description: "To try my hand in game dev, and as a pro",
+    description: "To try my hand in game dev, and as a project for school.",
     image: "images/project-photos/bomberman-photos/bomberman-main-photo.png",
     tech: ["Java"],
-    color: "from-blue-500 to-purple-600",
+    color: "from-neutral-400 to-slate-900",
     projectLink: "#"
   },
   {
     title: "Aguhon: AI Disaster Management Assistant",
-    description: "Interactive weather dashboard with detailed forecasts, interactive maps, and severe weather alerts.",
+    description: "AI assistant for pre-, during, and post-disaster scenarios.",
     image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80",
     tech: ["React", "Next.js"],
     color: "from-pink-500 to-orange-500",
@@ -69,7 +69,7 @@ const projects = [
   },
   {
     title: "Fuse",
-    description: "Interactive weather dashboard with detailed forecasts, interactive maps, and severe weather alerts.",
+    description: "Site to connect students with fellow students for hackathons teammates, hackathons, and connecting to internships.",
     image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80",
     tech: ["React", "Next.js"],
     color: "from-pink-500 to-orange-500",
@@ -94,7 +94,7 @@ const experiences = [
     location: "Remote",
     description: "Built and scaled the core product from MVP to 100K+ users. Implemented real-time features and payment systems.",
     skills: ["Node.js", "React", "MongoDB", "Redis"],
-    color: "from-blue-500 to-indigo-600",
+    color: "from-neutral-400 to-slate-600",
   },
   {
     company: "Boxhive Digital Solutions",
@@ -150,7 +150,7 @@ function useFadeIn() {
 
 // ── Components ────────────────────────────────────────────────────────────────
 
-function ScrollPrompt({ text, targetId, dark = true }: { text: string; targetId: string; dark?: boolean }) {
+function ScrollPrompt({ text, targetId}: { text: string; targetId: string}) {
   return (
     <div
       onClick={() => scrollTo(targetId)}
@@ -183,10 +183,17 @@ function Hero() {
   const [photo, setPhoto] = useState(0);
   const [loaded, setLoaded] = useState(false);
 
+  // ─── ADDED: Cyclical loop handlers for left and right buttons ───
+  const handlePrev = () => {
+    setPhoto((p) => (p === 0 ? photos.length - 1 : p - 1));
+  };
+
+  const handleNext = () => {
+    setPhoto((p) => (p === photos.length - 1 ? 0 : p + 1));
+  };
+
   useEffect(() => {
     setLoaded(true); // Triggers clean initial load transitions
-    const t1 = setInterval(() => setPhoto(p => (p + 1) % photos.length), 3000);
-    return () => { clearInterval(t1);};
   }, []);
 
   return (
@@ -199,14 +206,14 @@ function Hero() {
           style={{ opacity: loaded ? 1 : 0, transform: loaded ? "translateX(0)" : "translateX(-40px)" }}
         >
           <h1 className="text-4xl lg:text-4.5xl leading-tight font-press-start-2p break-words">
-            I'm <span className="font-bold bg-clip-text text-purple-400">Ishi</span>, and I like{" "}
+            I'm <span className="font-bold bg-clip-text text-purple-600">Ishi</span>, and I like{" "}
             <span className="inline-block relative align-bottom">
               <Typewriter
                 words = {interests}
                 typingSpeed = {80}
                 deletingSpeed = {40}
                 pauseDuration={2000}
-                textColor = "text-purple-400"
+                textColor = "text-purple-600"
               />
             </span>
           </h1>
@@ -215,33 +222,70 @@ function Hero() {
           </p>
         </div>
 
-        {/* Photo Carousel */}
+        {/* Photo Carousel Area */}
         <div 
-          className="flex items-center justify-center transition-all duration-1000 delay-200 ease-out"
+          className="relative flex items-center justify-center transition-all duration-1000 delay-200 ease-out h-[400px] w-full"
           style={{ opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(30px)" }}
         >
-          <div className="relative w-full max-w-sm aspect-square">
-            {photos.map((src, i) => (
-              <img
-                key={src}
-                src={src}
-                alt="Ishi"
-                className="absolute inset-0 w-full h-full object-cover rounded-2xl shadow-2xl ring-4 ring-white/20 transition-opacity duration-700 ease-in-out"
-                style={{ opacity: i === photo ? 1 : 0, zIndex: i === photo ? 1 : 0 }}
-              />
-            ))}
-            <div className="absolute -bottom-4 -right-4 bg-white/10 rounded-full p-4 z-10">
-              <div className="flex gap-2">
-                {photos.map((_, i) => (
-                  <button 
-                    key={i} 
-                    onClick={() => setPhoto(i)} 
-                    className={`h-2 rounded-full transition-all duration-300 ${i === photo ? "bg-white w-8" : "bg-white/50 w-2"}`} 
+          {/* Left Arrow - Positioned completely outside the clipping window */}
+          <button 
+            onClick={handlePrev}
+            className="absolute left-0 lg:-left-6 z-30 bg-slate-900/50 hover:bg-slate-900/70 text-white p-3 rounded-full border border-white/10 backdrop-blur-sm transition-all hover:scale-110 active:scale-95"
+          >
+            <ChevronDown className="w-6 h-6 rotate-90" />
+          </button>
+
+          {/* ─── NEW: CLIPPING MASK WINDOW ─── */}
+          {/* This container defines exactly how much of the side photos can be seen before they vanish */}
+          <div className="relative w-[460px] sm:w-[500px] h-full overflow-hidden flex items-center justify-center">
+            
+            {/* Inner viewport matching the size of the active center photo */}
+            <div className="relative w-[260px] sm:w-[300px] aspect-square flex items-center justify-center">
+              {photos.map((src, i) => {
+                let offset = i - photo;
+                
+                if (offset < -1) offset += photos.length;
+                if (offset > 1) offset -= photos.length;
+
+                const isCenter = offset === 0;
+                const isLeft = offset === -1;
+                const isRight = offset === 1;
+                const isHidden = !isCenter && !isLeft && !isRight;
+
+                return (
+                  <img
+                    key={src}
+                    src={src}
+                    alt="Ishi"
+                    className="absolute inset-0 w-full h-full object-cover rounded-2xl shadow-2xl ring-4 ring-white/10 transition-all duration-500 ease-in-out"
+                    style={{
+                      /* ─── CHANGED: Lowered translation from 112% to 100% ─── */
+                      /* This moves them exactly to the edge of the center photo, keeping their inside halves 100% visible inside the window */
+                      transform: isCenter 
+                        ? "translateX(0) scale(1)" 
+                        : isLeft 
+                        ? "translateX(-100%) scale(0.85)" 
+                        : isRight 
+                        ? "translateX(100%) scale(0.85)" 
+                        : "translateX(0) scale(0.5)",
+                      opacity: isCenter ? 1 : isHidden ? 0 : 0.4, /* Kept slightly brighter at 40% */
+                      zIndex: isCenter ? 20 : isHidden ? 0 : 10,
+                      pointerEvents: isCenter ? "auto" : "none"
+                    }}
                   />
-                ))}
-              </div>
+                );
+              })}
             </div>
+
           </div>
+
+          {/* Right Arrow - Positioned completely outside the clipping window */}
+          <button 
+            onClick={handleNext}
+            className="absolute right-0 lg:-right-6 z-30 bg-slate-900/50 hover:bg-slate-900/70 text-white p-3 rounded-full border border-white/10 backdrop-blur-sm transition-all hover:scale-110 active:scale-95"
+          >
+            <ChevronDown className="w-6 h-6 -rotate-90" />
+          </button>
         </div>
 
         {/* Contacts */}
@@ -256,7 +300,7 @@ function Hero() {
                 className={`${c.color} rounded-xl p-6 flex flex-col items-center gap-3 text-white hover:scale-105 hover:rotate-1 active:scale-95 transition-transform duration-200 shadow-lg`}
               >
                 {c.isCustomLogo ? (
-                  <img src={c.logoPath} alt={c.label} className="w-8 h-8 object-contain" />
+                  <img src={c.logoPath} alt={c.label} className="w-8 h-8 object-contain invert" />
                 ) : (
                   c.icon && <c.icon className="w-8 h-8" />
                 )}
@@ -275,13 +319,13 @@ function Projects() {
     <section id="projects" className="min-h-screen py-20 px-8 backdrop-blur-md">
       <div className="max-w-6xl mx-auto">
         <FadeIn className="mb-16 text-center">
-          <h2 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-pink-400 pb-4 mb-4 font-press-start-2p">My Projects</h2>
-          <p className="text-white-600 text-lg">{"A collection of things I've built and shipped"}</p>
+          <h2 className="text-5xl text-white pb-4 mb-4 font-press-start-2p">My Projects</h2>
+          <p className="text-white text-lg">{"A collection of things I've built and shipped"}</p>
         </FadeIn>
         <div className="space-y-12">
           {projects.map((p, i) => (
             <FadeIn key={p.title} delay={i * 100}>
-              <div className={`rounded-2xl overflow-hidden shadow-xl md:h-[350px] bg-gradient-to-r ${p.color} grid md:grid-cols-2 ${i % 2 !== 0 ? "md:[&>*:first-child]:order-2" : ""}`}>
+              <div className={`rounded-2xl overflow-hidden shadow-xl md:h-[350px] bg-gradient-to-r grid md:grid-cols-2 ${i % 2 !== 0 ? "md:[&>*:first-child]:order-2" : ""} ${i % 2 !== 0 ? "from-slate-900 to-neutral-600" : "from-neutral-600 to-slate-900"}`}>
                 <img src={p.image} alt={p.title} className="w-full h-full object-cover min-h-[250px]" />
                 <div className="p-8 text-white flex flex-col justify-between">
                   <div className="space-y-4">
@@ -314,8 +358,8 @@ function Experiences() {
     <section id="experiences" className="min-h-[92vh] py-20 px-8 backdrop-blur-md">
       <div className="max-w-7xl mx-auto">
         <FadeIn className="mb-12 text-center">
-          <h2 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-pink-400 mb-4 font-press-start-2p">My Journey</h2>
-          <p className="text-purple-300 text-lg">Scroll to explore my experiences</p>
+          <h2 className="text-5xl text-white mb-4 font-press-start-2p">My Journey</h2>
+          <p className="text-white text-lg">Scroll to explore my experiences</p>
         </FadeIn>
         <div className="overflow-x-auto pb-8" style={{ scrollbarWidth: "thin" }}>
           <div className="flex gap-8 min-w-max px-4 py-8 -my-6 pt-15 -mt-10">
@@ -349,8 +393,8 @@ function Skills() {
     <section id="skills" className="min-h-screen py-20 px-8 backdrop-blur-md">
       <div className="max-w-7xl mx-auto">
         <FadeIn className="mb-16 text-center">
-          <h2 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 to-pink-600 mb-4 font-press-start-2p">Skills & Expertise</h2>
-          <p className="text-white-600 text-lg">My tech stack and other tools!</p>
+          <h2 className="text-5xl text-white mb-4 font-press-start-2p">Skills & Expertise</h2>
+          <p className="text-white text-lg">My tech stack and other tools!</p>
         </FadeIn>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skills.map((cat, i) => (
@@ -359,7 +403,7 @@ function Skills() {
                 <h3 className="text-lg font-bold text-slate-800 mb-4">{cat.title}</h3>
                 <div className="flex flex-wrap gap-2">
                   {cat.items.map(item => (
-                    <span key={item} className="bg-gradient-to-r from-orange-100 to-pink-100 text-orange-700 text-sm px-3 py-1 rounded-full font-medium">{item}</span>
+                    <span key={item} className="bg-slate-200 text-blue-700 text-sm px-3 py-1 rounded-full font-medium">{item}</span>
                   ))}
                 </div>
               </div>
@@ -382,7 +426,7 @@ export default function App() {
       <Experiences />
       <ScrollPrompt text="check out my skills" targetId="skills"/>
       <Skills />
-      <footer className="text-white py-12 text-center backdrop-blur-md bg-slate-950/20">
+      <footer className="text-white py-8 text-center backdrop-blur-md bg-slate-950/20">
         <p className="text-xl mb-2">Thanks for stopping by!</p>
         <p className="text-purple-300 text-sm">Built with React, TailwindCSS • © 2026 Ishi</p>
       </footer>
