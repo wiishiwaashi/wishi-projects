@@ -45,24 +45,24 @@ const projects = [
   },
   {
     title: "Cybersecurity Triage Data Generation & Analysis",
-    description: "A collaborative task management application with team boards, real-time updates, and productivity analytics.",
+    description: "A data modeling project that simulates real-world cybersecurity data triage and performs Exploratory Data Analysis.",
     image: "images/project-photos/eif-photos/eif-main-photo.png",
     tech: ["Python", "Pandas", "Matplotlib", "Numpy", "Seaborn", "Tableau"],
     color: "from-slate-900 to-neutral-400",
-    projectLink: "#"
+    projectLink: "https://github.com/wiishiwaashi/cybersec-data-generator-analysis.git"
   },
   {
     title: "Bomberman Game Dupe",
-    description: "To try my hand in game dev, and as a project for school.",
+    description: "To try my hand in game dev, and as a project for school. Includes Web Sockets",
     image: "images/project-photos/bomberman-photos/bomberman-main-photo.png",
     tech: ["Java"],
     color: "from-neutral-400 to-slate-900",
-    projectLink: "#"
+    projectLink: "https://github.com/wiishiwaashi/bombsaway-pvp-game.git"
   },
   {
     title: "Aguhon: AI Disaster Management Assistant",
     description: "AI assistant for pre-, during, and post-disaster scenarios.",
-    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80",
+    image: "images/project-photos/aguhon-photos/aguhon-main-photo.png",
     tech: ["React", "Next.js"],
     color: "from-pink-500 to-orange-500",
     projectLink: "https://aguhon-disaster-intelligence.vercel.app"
@@ -70,8 +70,8 @@ const projects = [
   {
     title: "Fuse",
     description: "Site to connect students with fellow students for hackathons teammates, hackathons, and connecting to internships.",
-    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80",
-    tech: ["React", "Next.js"],
+    image: "images/project-photos/fuse-photos/fuse-main-photo.png",
+    tech: ["React", "Next.js", "Firebase"],
     color: "from-pink-500 to-orange-500",
     projectLink: "https://fuse-alpha.vercel.app"
   },
@@ -83,8 +83,8 @@ const experiences = [
     role: "Natural Language Processing Intern",
     period: "June 2023 – July 2023",
     location: "Taft, Manila",
-    description: "Leading the frontend architecture team, implementing cutting-edge React solutions and mentoring junior developers.",
-    skills: ["React", "TypeScript", "GraphQL", "AWS"],
+    description: "Helped in data preparation and validation of chatbot projects, presented research on semantics, made Python scripts for easier data gathering and classification",
+    skills: ["DeepNote", "Jupyter", "Python", "RegEx"],
     color: "from-emerald-500 to-teal-600",
   },
   {
@@ -92,8 +92,8 @@ const experiences = [
     role: "Data Modeling Fellow",
     period: "Feb 2026– Present",
     location: "Remote",
-    description: "Built and scaled the core product from MVP to 100K+ users. Implemented real-time features and payment systems.",
-    skills: ["Node.js", "React", "MongoDB", "Redis"],
+    description: "Built a cybersecurity triage data generator",
+    skills: ["Python", "Numpy", "Matplotlib", "Seaborn", "Pandas", "Tableau"],
     color: "from-neutral-400 to-slate-600",
   },
   {
@@ -102,7 +102,7 @@ const experiences = [
     period: "June 2026 – Present",
     location: "Remote",
     description: "Developed responsive web applications for client projects. Contributed to the company component library.",
-    skills: ["HTML", "CSS", "JavaScript", "Figma"],
+    skills: ["TypeScript", "Docker", "React", "Figma", "Next.js"],
     color: "from-purple-500 to-pink-600",
   },
   {
@@ -110,16 +110,17 @@ const experiences = [
     role: "Product Engineering Junior Mission Specialist",
     period: "June 2026 – Present",
     location: "Remote",
-    description: "Conducted research on web accessibility and developed tools to improve user experience for people with disabilities.",
-    skills: ["Python", "Data Analysis", "UX Research"],
+    description: "Identify and fix bug fixes, work on client projects",
+    skills: ["Git", "Full Stack Development"],
     color: "from-orange-500 to-red-600",
   },
 ];
 
 const skills = [
-  { title: "Languages", items: ["JavaScript", "TypeScript", "Python", "HTML/CSS", "SQL"] },
-  { title: "Frameworks", items: ["React", "Next.js", "Node.js", "Express", "Vue.js"] },
-  { title: "Databases", items: ["PostgreSQL", "MongoDB", "Redis", "Firebase"] },
+  { title: "Languages", items: ["JavaScript", "TypeScript", "Python", "HTML/CSS", "SQL", "Java"] },
+  { title: "Frameworks", items: ["React", "Next.js", "Node.js", "Express"] },
+  { title: "Databases", items: ["PostgreSQL", "Firebase"] },
+  { title: "Data Science", items: ["Matplotlib", "Seaborn", "Numpy", "Pandas"] },
   { title: "Cloud & DevOps", items: ["AWS", "Docker", "Vercel", "CI/CD"] },
   { title: "Tools", items: ["Git", "Figma", "VS Code", "Postman", "Vite"] },
   { title: "Other", items: ["REST APIs", "GraphQL", "Jest", "Agile/Scrum"] },
@@ -325,12 +326,18 @@ function Projects() {
         <div className="space-y-12">
           {projects.map((p, i) => (
             <FadeIn key={p.title} delay={i * 100}>
-              <div className={`rounded-2xl overflow-hidden shadow-xl md:h-[350px] bg-gradient-to-r grid md:grid-cols-2 ${i % 2 !== 0 ? "md:[&>*:first-child]:order-2" : ""} ${i % 2 !== 0 ? "from-slate-900 to-neutral-600" : "from-neutral-600 to-slate-900"}`}>
-                <img src={p.image} alt={p.title} className="w-full h-full object-cover min-h-[250px]" />
-                <div className="p-8 text-white flex flex-col justify-between">
+              <div className={`rounded-2xl overflow-hidden shadow-xl md:h-[350px] bg-gradient-to-r flex flex-col md:flex-row ${i % 2 !== 0 ? "md:flex-row-reverse" : ""} ${i % 2 !== 0 ? "from-slate-900 to-neutral-600" : "from-neutral-600 to-slate-900"}`}>
+                  <div className="h-[250px] md:h-full flex-none bg-black/10 flex items-center justify-center">
+                  <img 
+                    src={p.image} 
+                    alt={p.title} 
+                    className="h-full w-auto max-w-full object-contain" 
+                  />
+                </div>
+                <div className="p-8 text-white flex flex-col justify-between flex-1 min-w-0">
                   <div className="space-y-4">
                     <h3 className="text-3xl font-bold">{p.title}</h3>
-                    <p className="text-white/90 leading-relaxed">{p.description}</p>
+                    <p className="text-white/90 leading-relaxed whitespace-pre-line">{p.description}</p>
                     <div className="flex flex-wrap gap-2">
                       {p.tech.map(t => <span key={t} className="bg-white/20 text-xs px-3 py-1 rounded-full">{t}</span>)}
                     </div>
