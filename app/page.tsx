@@ -320,7 +320,7 @@ function Experiences() {
     <section id="experiences" className="min-h-[92vh] py-20 px-8 backdrop-blur-md">
       <div className="max-w-7xl mx-auto">
         <FadeIn className="mb-12 text-center">
-          <h2 className="text-5xl text-white mb-4 font-press-start-2p">My Journey</h2>
+          <h2 className="text-5xl text-white mb-4 font-space-grotesk font-bold">My Journey</h2>
           <p className="text-white text-lg">Scroll to explore my experiences</p>
         </FadeIn>
         <div className="overflow-x-auto pb-8" style={{ scrollbarWidth: "thin" }}>
@@ -355,7 +355,7 @@ function Skills() {
     <section id="skills" className="min-h-screen py-20 px-8 backdrop-blur-md">
       <div className="max-w-7xl mx-auto">
         <FadeIn className="mb-16 text-center">
-          <h2 className="text-5xl text-white mb-4 font-press-start-2p">Skills & Expertise</h2>
+          <h2 className="text-5xl text-white mb-4 font-space-grotesk font-bold">Skills & Expertise</h2>
           <p className="text-white text-lg">My tech stack and other tools!</p>
         </FadeIn>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
