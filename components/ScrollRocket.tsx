@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 // ── Tuning ────────────────────────────────────────────────────────────────────
 const SWINGS = 1; // full right→left→right cycles over the whole page (try 1.5 or 2)
-const AMPLITUDE = 0.36; // how far it swings, as a fraction of viewport width
+const AMPLITUDE = 0.50; // how far it swings, as a fraction of viewport width
 const SMOOTHING = 0.08; // 0-1, lower = floatier and slower to catch up
 const MAX_TILT = 65; // max degrees the nose leans away from straight down
 const W = 40;
