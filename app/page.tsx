@@ -15,6 +15,7 @@ import {
 
 import Typewriter from "@/components/Typewriter";
 import {BubbleBackground} from "@/components/AnimatedBackground"
+import Image from "next/image";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
@@ -38,7 +39,7 @@ const projects = [
   {
     title: "Katha: The Network for Tech Work",
     description: "A B2B/B2C marketplace for tech services in the Philippines, including 3D Printing, Laser, and CAD.",
-    image: "images/project-photos/katha-photos/katha-main-photo.png",
+    image: "/images/project-photos/katha-photos/katha-main-photo.png",
     tech: ["React", "FastAPI", "PostgreSQL", "Railway", "Vercel"],
     color: "from-neutral-400 to-slate-900",
     projectLink: "https://v0-katha-delta.vercel.app"
@@ -46,7 +47,7 @@ const projects = [
   {
     title: "Cybersecurity Triage Data Generation & Analysis",
     description: "A data modeling project that simulates real-world cybersecurity data triage and performs Exploratory Data Analysis.",
-    image: "images/project-photos/eif-photos/eif-main-photo.png",
+    image: "/images/project-photos/eif-photos/eif-main-photo.png",
     tech: ["Python", "Pandas", "Matplotlib", "Numpy", "Seaborn", "Tableau"],
     color: "from-slate-900 to-neutral-400",
     projectLink: "https://github.com/wiishiwaashi/cybersec-data-generator-analysis.git"
@@ -54,7 +55,7 @@ const projects = [
   {
     title: "Bomberman Game Dupe",
     description: "To try my hand in game dev, and as a project for school. Includes Web Sockets",
-    image: "images/project-photos/bomberman-photos/bomberman-main-photo.png",
+    image: "/images/project-photos/bomberman-photos/bomberman-main-photo.png",
     tech: ["Java"],
     color: "from-neutral-400 to-slate-900",
     projectLink: "https://github.com/wiishiwaashi/bombsaway-pvp-game.git"
@@ -62,7 +63,7 @@ const projects = [
   {
     title: "Aguhon: AI Disaster Management Assistant",
     description: "AI assistant for pre-, during, and post-disaster scenarios.",
-    image: "images/project-photos/aguhon-photos/aguhon-main-photo.png",
+    image: "/images/project-photos/aguhon-photos/aguhon-main-photo.png",
     tech: ["React", "Next.js"],
     color: "from-pink-500 to-orange-500",
     projectLink: "https://aguhon-disaster-intelligence.vercel.app"
@@ -70,7 +71,7 @@ const projects = [
   {
     title: "Fuse",
     description: "Site to connect students with fellow students for hackathons teammates, hackathons, and connecting to internships.",
-    image: "images/project-photos/fuse-photos/fuse-main-photo.png",
+    image: "/images/project-photos/fuse-photos/fuse-main-photo.png",
     tech: ["React", "Next.js", "Firebase"],
     color: "from-pink-500 to-orange-500",
     projectLink: "https://fuse-alpha.vercel.app"
@@ -177,11 +178,11 @@ function FadeIn({ children, className = "", delay = 0 }: { children: React.React
 }
 
 function Hero() {
-  const [photo, setPhoto] = useState(0);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    setLoaded(true); // Triggers clean initial load transitions
+    const id = requestAnimationFrame(() => setLoaded(true));
+    return () => cancelAnimationFrame(id);
   }, []);
 
   return (
@@ -196,7 +197,7 @@ function Hero() {
           }}
         >
           <h1 className="text-4xl lg:text-4.5xl leading-tight font-space-grotesk break-words">
-            I'm{" "}
+            I&apos;m{" "}
             <span className="font-bold bg-clip-text text-purple-600">Ishi</span>
             , and I like{" "}
             <span className="inline-block relative align-bottom">
@@ -223,9 +224,11 @@ function Hero() {
             transform: loaded ? "translateY(0)" : "translateY(30px)",
           }}
         >
-          <img
+          <Image
             src="/images/self-carousel/photo-of-me-1.jpg"
             alt="Ishi"
+            width={200}
+            height={200}
             className="w-[260px] sm:w-[300px] aspect-square object-cover rounded-2xl shadow-2xl ring-4 ring-white/10"
           />
         </div>
@@ -240,7 +243,7 @@ function Hero() {
         >
           <h2 className="text-2xl mb-6 font-bold font-space-grotesk">
             {" "}
-            Let's connect!{" "}
+            Let&apos;s connect!{" "}
           </h2>
           <div className="grid grid-cols-2 gap-4">
             {contacts.map((c) => (
@@ -252,9 +255,11 @@ function Hero() {
                 className={`${c.color} rounded-xl p-6 flex flex-col items-center gap-3 text-white hover:scale-105 hover:rotate-1 active:scale-95 transition-transform duration-200 shadow-lg`}
               >
                 {c.isCustomLogo ? (
-                  <img
-                    src={c.logoPath}
+                  <Image
+                    src={c.logoPath ?? ""}
                     alt={c.label}
+                    width={32}
+                    height={32}
                     className="w-8 h-8 object-contain invert"
                   />
                 ) : (
@@ -275,33 +280,56 @@ function Projects() {
     <section id="projects" className="min-h-screen py-20 px-8 backdrop-blur-md">
       <div className="max-w-6xl mx-auto">
         <FadeIn className="mb-16 text-center">
-          <h2 className="text-5xl text-white pb-4 mb-4 font-space-grotesk font-bold">My Projects</h2>
-          <p className="text-white text-lg">{"A collection of things I've built and shipped"}</p>
+          <h2 className="text-5xl text-white pb-4 mb-4 font-space-grotesk font-bold">
+            My Projects
+          </h2>
+          <p className="text-white text-lg">
+            {"A collection of things I've built and shipped"}
+          </p>
         </FadeIn>
         <div className="space-y-12">
           {projects.map((p, i) => (
             <FadeIn key={p.title} delay={i * 100}>
-              <div className={`rounded-2xl overflow-hidden shadow-xl md:h-[350px] bg-gradient-to-r flex flex-col md:flex-row ${i % 2 !== 0 ? "md:flex-row-reverse" : ""} ${i % 2 !== 0 ? "from-slate-900 to-neutral-600" : "from-neutral-600 to-slate-900"}`}>
-                  <div className="h-[250px] md:h-full flex-none bg-black/10 flex items-center justify-center">
-                  <img 
-                    src={p.image} 
-                    alt={p.title} 
-                    className="h-full w-auto max-w-full object-contain" 
+              <div
+                className={`rounded-2xl overflow-hidden shadow-xl md:h-[350px] bg-gradient-to-r flex flex-col md:flex-row ${i % 2 !== 0 ? "md:flex-row-reverse" : ""} ${i % 2 !== 0 ? "from-slate-900 to-neutral-600" : "from-neutral-600 to-slate-900"}`}
+              >
+                <div className="relative h-[250px] md:h-full w-full md:w-1/2 flex-none bg-black/10">
+                  <Image
+                    src={p.image}
+                    alt={p.title}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="object-cover object-top"
                   />
                 </div>
-                <div className="p-8 text-white flex flex-col justify-between flex-1 min-w-0">
+                <div className="p-8 text-white flex flex-col justify-between md:w-1/2 min-w-0">
                   <div className="space-y-4">
                     <h3 className="text-3xl font-bold">{p.title}</h3>
-                    <p className="text-white/90 leading-relaxed whitespace-pre-line">{p.description}</p>
+                    <p className="text-white/90 leading-relaxed whitespace-pre-line">
+                      {p.description}
+                    </p>
                     <div className="flex flex-wrap gap-2">
-                      {p.tech.map(t => <span key={t} className="bg-white/20 text-xs px-3 py-1 rounded-full">{t}</span>)}
+                      {p.tech.map((t) => (
+                        <span
+                          key={t}
+                          className="bg-white/20 text-xs px-3 py-1 rounded-full"
+                        >
+                          {t}
+                        </span>
+                      ))}
                     </div>
                   </div>
                   <div className="flex gap-4 pt-6">
-                    <a href={p.projectLink} className="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors text-sm">
+                    <a
+                      href={p.projectLink}
+                      className="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors text-sm"
+                    >
                       <ExternalLink className="w-4 h-4" /> Live Demo
                     </a>
-                    <a href="#" className="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors text-sm">
+                    <a
+                      href="#"
+                      className="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors text-sm"
+                    >
                       <Globe className="w-4 h-4" /> Code
                     </a>
                   </div>
