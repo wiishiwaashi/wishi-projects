@@ -66,13 +66,14 @@ export default function Experiences() {
         </FadeIn>
       </div>
 
+      {/* No mask-image here: a masked parent stops backdrop-blur from seeing the background */}
       <div
         ref={scrollerRef}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
-        className="w-full overflow-x-auto cursor-grab active:cursor-grabbing select-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]"
+        className="w-full overflow-x-auto cursor-grab active:cursor-grabbing select-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         <div className="flex items-center w-max py-10">
           {Array.from({ length: COPIES }, (_, copy) => (
@@ -97,34 +98,50 @@ export default function Experiences() {
 
                   {/* Card */}
                   <div
-                    className={`flex-none w-96 h-[400px] rounded-2xl bg-gradient-to-br ${e.color} shadow-2xl hover:scale-105 transition-transform duration-300 p-8 text-white flex flex-col justify-between`}
+                    className="relative flex-none w-96 h-[400px] rounded-2xl overflow-hidden
+                      bg-gradient-to-br from-white/10 to-white/[0.02]
+                      backdrop-blur-2xl backdrop-saturate-150
+                      border border-white/30
+                      shadow-[0_8px_32px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(255,255,255,0.08)]
+                      hover:scale-105 transition-transform duration-300"
                   >
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-2 text-white/80 text-sm">
-                        <Building2 className="w-4 h-4 shrink-0" /> {e.company}
-                      </div>
-                      <h3 className="text-2xl font-bold">{e.role}</h3>
-                      <div className="space-y-1 text-sm text-white/90">
-                        <div className="flex items-center gap-2">
-                          <Calendar className="w-4 h-4" /> {e.period}
+                    {/* Glare: light catching the top-left corner */}
+                    <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(120%_80%_at_0%_0%,rgba(255,255,255,0.22),transparent_55%)]" />
+
+                    {/* Color tint: raise or lower the opacity to taste */}
+                    <div
+                      className={`absolute inset-0 pointer-events-none bg-gradient-to-br ${e.color} opacity-15`}
+                    />
+
+                    {/* Content sits above the glare and tint */}
+                    <div className="relative h-full p-8 text-white flex flex-col justify-between">
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-2 text-white/80 text-sm">
+                          <Building2 className="w-4 h-4 shrink-0" /> {e.company}
                         </div>
-                        <div className="flex items-center gap-2">
-                          <MapPin className="w-4 h-4" /> {e.location}
+                        <h3 className="text-2xl font-bold">{e.role}</h3>
+                        <div className="space-y-1 text-sm text-white/90">
+                          <div className="flex items-center gap-2">
+                            <Calendar className="w-4 h-4" /> {e.period}
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <MapPin className="w-4 h-4" /> {e.location}
+                          </div>
                         </div>
+                        <p className="text-white/90 leading-relaxed text-sm">
+                          {e.description}
+                        </p>
                       </div>
-                      <p className="text-white/90 leading-relaxed text-sm">
-                        {e.description}
-                      </p>
-                    </div>
-                    <div className="flex flex-wrap gap-2 mt-4">
-                      {e.skills.map((s) => (
-                        <span
-                          key={s}
-                          className="bg-white/20 text-xs px-3 py-1 rounded-full"
-                        >
-                          {s}
-                        </span>
-                      ))}
+                      <div className="flex flex-wrap gap-2 mt-4">
+                        {e.skills.map((s) => (
+                          <span
+                            key={s}
+                            className="bg-white/20 text-xs px-3 py-1 rounded-full"
+                          >
+                            {s}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
