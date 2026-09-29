@@ -6,7 +6,6 @@ import {
   ExternalLink, 
   Mail, 
   FileText, 
-  MessageCircle, 
   Building2, 
   Calendar, 
   MapPin,
@@ -14,18 +13,10 @@ import {
 } from "lucide-react";
 
 import Typewriter from "@/components/Typewriter";
-import {BubbleBackground} from "@/components/BubbleBackground"
 import SpaceBackground from "@/components/SpaceBackground";
+import ScrollRocket from "@/components/ScrollRocket";
 import Image from "next/image";
 
-// ── Data ──────────────────────────────────────────────────────────────────────
-
-const photos = [
-  "/images/self-carousel/photo-of-me-1.jpg",
-  "/images/self-carousel/photo-of-me-2.JPG",
-  "/images/self-carousel/photo-of-me-3.jpg",
-  "/images/self-carousel/photo-of-me-4.jpg",
-];
 
 const interests = ["building software", "analyzing data", "playing video games", "learning new things", "creating impact"];
 
@@ -410,6 +401,7 @@ export default function App() {
   return (
     <div className="overflow-x-hidden">
       <SpaceBackground />
+      <ScrollRocket />
       <Hero />
       <ScrollPrompt text="scroll to see my projects" targetId="projects"/>
       <Projects />
