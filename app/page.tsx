@@ -149,8 +149,6 @@ function useFadeIn() {
   return ref;
 }
 
-// ── Components ────────────────────────────────────────────────────────────────
-
 function ScrollPrompt({ text, targetId}: { text: string; targetId: string}) {
   return (
     <div
@@ -159,7 +157,7 @@ function ScrollPrompt({ text, targetId}: { text: string; targetId: string}) {
     >
       <div className="flex flex-row items-center gap-2">
         <span className="text-sm">{text}</span>
-        <ChevronDown className="w-6 h-6 animate-bounce translate-y-[4px]" />
+        <ChevronDown className="w-6 h-6 animate-bounce translate-y-[3px]" />
       </div>
     </div>
   );
@@ -178,20 +176,9 @@ function FadeIn({ children, className = "", delay = 0 }: { children: React.React
   );
 }
 
-// ── Sections ──────────────────────────────────────────────────────────────────
-
 function Hero() {
   const [photo, setPhoto] = useState(0);
   const [loaded, setLoaded] = useState(false);
-
-  // ─── ADDED: Cyclical loop handlers for left and right buttons ───
-  const handlePrev = () => {
-    setPhoto((p) => (p === 0 ? photos.length - 1 : p - 1));
-  };
-
-  const handleNext = () => {
-    setPhoto((p) => (p === photos.length - 1 ? 0 : p + 1));
-  };
 
   useEffect(() => {
     setLoaded(true); // Triggers clean initial load transitions
@@ -200,108 +187,76 @@ function Hero() {
   return (
     <section className="min-h-[92vh] text-white flex items-center justify-center p-8 overflow-hidden backdrop-blur-md">
       <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
-
         {/* Intro */}
-        <div 
+        <div
           className="flex flex-col justify-center space-y-6 transition-all duration-1000 ease-out max-w-md"
-          style={{ opacity: loaded ? 1 : 0, transform: loaded ? "translateX(0)" : "translateX(-40px)" }}
+          style={{
+            opacity: loaded ? 1 : 0,
+            transform: loaded ? "translateX(0)" : "translateX(-40px)",
+          }}
         >
-          <h1 className="text-4xl lg:text-4.5xl leading-tight font-press-start-2p break-words">
-            I'm <span className="font-bold bg-clip-text text-purple-600">Ishi</span>, and I like{" "}
+          <h1 className="text-4xl lg:text-4.5xl leading-tight font-space-grotesk break-words">
+            I'm{" "}
+            <span className="font-bold bg-clip-text text-purple-600">Ishi</span>
+            , and I like{" "}
             <span className="inline-block relative align-bottom">
               <Typewriter
-                words = {interests}
-                typingSpeed = {80}
-                deletingSpeed = {40}
+                words={interests}
+                typingSpeed={80}
+                deletingSpeed={40}
                 pauseDuration={2000}
-                textColor = "text-purple-600"
+                textColor="text-purple-600"
               />
             </span>
           </h1>
           <p className="text-lg text-purple-200 leading-relaxed font-inter-sans">
-            I am a current CS student focused on web development and data science who loves to play sports on the side!
+            I am a current CS student focused on web development and data
+            science who loves to play sports on the side!
           </p>
         </div>
 
-        {/* Photo Carousel Area */}
-        <div 
-          className="relative flex items-center justify-center transition-all duration-1000 delay-200 ease-out h-[400px] w-full"
-          style={{ opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(30px)" }}
+        {/* Photo */}
+        <div
+          className="flex items-center justify-center transition-all duration-1000 delay-200 ease-out"
+          style={{
+            opacity: loaded ? 1 : 0,
+            transform: loaded ? "translateY(0)" : "translateY(30px)",
+          }}
         >
-          {/* Left Arrow - Positioned completely outside the clipping window */}
-          <button 
-            onClick={handlePrev}
-            className="absolute left-0 lg:-left-6 z-30 bg-slate-900/50 hover:bg-slate-900/70 text-white p-3 rounded-full border border-white/10 backdrop-blur-sm transition-all hover:scale-110 active:scale-95"
-          >
-            <ChevronDown className="w-6 h-6 rotate-90" />
-          </button>
-
-          {/* ─── NEW: CLIPPING MASK WINDOW ─── */}
-          {/* This container defines exactly how much of the side photos can be seen before they vanish */}
-          <div className="relative w-[460px] sm:w-[500px] h-full overflow-hidden flex items-center justify-center">
-            
-            {/* Inner viewport matching the size of the active center photo */}
-            <div className="relative w-[260px] sm:w-[300px] aspect-square flex items-center justify-center">
-              {photos.map((src, i) => {
-                let offset = i - photo;
-                
-                if (offset < -1) offset += photos.length;
-                if (offset > 1) offset -= photos.length;
-
-                const isCenter = offset === 0;
-                const isLeft = offset === -1;
-                const isRight = offset === 1;
-                const isHidden = !isCenter && !isLeft && !isRight;
-
-                return (
-                  <img
-                    key={src}
-                    src={src}
-                    alt="Ishi"
-                    className="absolute inset-0 w-full h-full object-cover rounded-2xl shadow-2xl ring-4 ring-white/10 transition-all duration-500 ease-in-out"
-                    style={{
-                      /* ─── CHANGED: Lowered translation from 112% to 100% ─── */
-                      /* This moves them exactly to the edge of the center photo, keeping their inside halves 100% visible inside the window */
-                      transform: isCenter 
-                        ? "translateX(0) scale(1)" 
-                        : isLeft 
-                        ? "translateX(-100%) scale(0.85)" 
-                        : isRight 
-                        ? "translateX(100%) scale(0.85)" 
-                        : "translateX(0) scale(0.5)",
-                      opacity: isCenter ? 1 : isHidden ? 0 : 0.4, /* Kept slightly brighter at 40% */
-                      zIndex: isCenter ? 20 : isHidden ? 0 : 10,
-                      pointerEvents: isCenter ? "auto" : "none"
-                    }}
-                  />
-                );
-              })}
-            </div>
-
-          </div>
-
-          {/* Right Arrow - Positioned completely outside the clipping window */}
-          <button 
-            onClick={handleNext}
-            className="absolute right-0 lg:-right-6 z-30 bg-slate-900/50 hover:bg-slate-900/70 text-white p-3 rounded-full border border-white/10 backdrop-blur-sm transition-all hover:scale-110 active:scale-95"
-          >
-            <ChevronDown className="w-6 h-6 -rotate-90" />
-          </button>
+          <img
+            src="/images/self-carousel/photo-of-me-1.jpg"
+            alt="Ishi"
+            className="w-[260px] sm:w-[300px] aspect-square object-cover rounded-2xl shadow-2xl ring-4 ring-white/10"
+          />
         </div>
 
         {/* Contacts */}
-        <div 
+        <div
           className="flex flex-col justify-center transition-all duration-1000 delay-400 ease-out"
-          style={{ opacity: loaded ? 1 : 0, transform: loaded ? "translateX(0)" : "translateX(40px)" }}
+          style={{
+            opacity: loaded ? 1 : 0,
+            transform: loaded ? "translateX(0)" : "translateX(40px)",
+          }}
         >
-          <h2 className="text-2xl mb-6 font-bold font-press-start-2p"> Let's connect! </h2>
+          <h2 className="text-2xl mb-6 font-bold font-space-grotesk">
+            {" "}
+            Let's connect!{" "}
+          </h2>
           <div className="grid grid-cols-2 gap-4">
             {contacts.map((c) => (
-              <a key={c.label} href={c.url} target="_blank" rel="noopener noreferrer"
+              <a
+                key={c.label}
+                href={c.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`${c.color} rounded-xl p-6 flex flex-col items-center gap-3 text-white hover:scale-105 hover:rotate-1 active:scale-95 transition-transform duration-200 shadow-lg`}
               >
                 {c.isCustomLogo ? (
-                  <img src={c.logoPath} alt={c.label} className="w-8 h-8 object-contain invert" />
+                  <img
+                    src={c.logoPath}
+                    alt={c.label}
+                    className="w-8 h-8 object-contain invert"
+                  />
                 ) : (
                   c.icon && <c.icon className="w-8 h-8" />
                 )}
@@ -320,7 +275,7 @@ function Projects() {
     <section id="projects" className="min-h-screen py-20 px-8 backdrop-blur-md">
       <div className="max-w-6xl mx-auto">
         <FadeIn className="mb-16 text-center">
-          <h2 className="text-5xl text-white pb-4 mb-4 font-press-start-2p">My Projects</h2>
+          <h2 className="text-5xl text-white pb-4 mb-4 font-space-grotesk font-bold">My Projects</h2>
           <p className="text-white text-lg">{"A collection of things I've built and shipped"}</p>
         </FadeIn>
         <div className="space-y-12">
