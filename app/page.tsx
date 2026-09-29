@@ -14,7 +14,8 @@ import {
 } from "lucide-react";
 
 import Typewriter from "@/components/Typewriter";
-import {BubbleBackground} from "@/components/AnimatedBackground"
+import {BubbleBackground} from "@/components/BubbleBackground"
+import SpaceBackground from "@/components/SpaceBackground";
 import Image from "next/image";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
@@ -154,7 +155,7 @@ function ScrollPrompt({ text, targetId}: { text: string; targetId: string}) {
   return (
     <div
       onClick={() => scrollTo(targetId)}
-      className={`h-[8vh] flex items-center justify-center cursor-pointer select-none backdrop-blur-md bg-slate-950/20 hover:bg-slate-950/30 text-white`}
+      className={`h-[8vh] flex items-center justify-center cursor-pointer select-none backdrop-blur-none bg-slate-950/20 hover:bg-slate-950/30 text-white`}
     >
       <div className="flex flex-row items-center gap-2">
         <span className="text-sm">{text}</span>
@@ -186,7 +187,7 @@ function Hero() {
   }, []);
 
   return (
-    <section className="min-h-[92vh] text-white flex items-center justify-center p-8 overflow-hidden backdrop-blur-md">
+    <section className="min-h-[92vh] text-white flex items-center justify-center p-8 overflow-hidden backdrop-blur-none">
       <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
         {/* Intro */}
         <div
@@ -277,7 +278,7 @@ function Hero() {
 
 function Projects() {
   return (
-    <section id="projects" className="min-h-screen py-20 px-8 backdrop-blur-md">
+    <section id="projects" className="min-h-screen py-20 px-8 backdrop-blur-none">
       <div className="max-w-6xl mx-auto">
         <FadeIn className="mb-16 text-center">
           <h2 className="text-5xl text-white pb-4 mb-4 font-space-grotesk font-bold">
@@ -345,7 +346,7 @@ function Projects() {
 
 function Experiences() {
   return (
-    <section id="experiences" className="min-h-[92vh] py-20 px-8 backdrop-blur-md">
+    <section id="experiences" className="min-h-[92vh] py-20 px-8 backdrop-blur-none">
       <div className="max-w-7xl mx-auto">
         <FadeIn className="mb-12 text-center">
           <h2 className="text-5xl text-white mb-4 font-space-grotesk font-bold">My Journey</h2>
@@ -380,7 +381,7 @@ function Experiences() {
 
 function Skills() {
   return (
-    <section id="skills" className="min-h-screen py-20 px-8 backdrop-blur-md">
+    <section id="skills" className="min-h-screen py-20 px-8 backdrop-blur-none">
       <div className="max-w-7xl mx-auto">
         <FadeIn className="mb-16 text-center">
           <h2 className="text-5xl text-white mb-4 font-space-grotesk font-bold">Skills & Expertise</h2>
@@ -408,7 +409,7 @@ function Skills() {
 export default function App() {
   return (
     <div className="overflow-x-hidden">
-      <BubbleBackground />
+      <SpaceBackground />
       <Hero />
       <ScrollPrompt text="scroll to see my projects" targetId="projects"/>
       <Projects />
@@ -416,7 +417,7 @@ export default function App() {
       <Experiences />
       <ScrollPrompt text="check out my skills" targetId="skills"/>
       <Skills />
-      <footer className="text-white py-8 text-center backdrop-blur-md bg-slate-950/20">
+      <footer className="text-white py-8 text-center backdrop-blur-none bg-slate-950/20">
         <p className="text-xl mb-2">Thanks for stopping by!</p>
         <p className="text-purple-300 text-sm">Built with React, TailwindCSS • © 2026 Ishi</p>
       </footer>
