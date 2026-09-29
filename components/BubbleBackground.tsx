@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef } from 'react';
 
-// Define the blueprint for a single Bubble object
 class Bubble {
   x: number;
   y: number;
@@ -65,7 +64,7 @@ export const BubbleBackground: React.FC = () => {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let bubbles: Bubble[] = [];
+    const bubbles: Bubble[] = [];
     const bubbleCount = 40; // Adjust for more or fewer bubbles
 
     // Set canvas dimensions to fit the window
