@@ -10,11 +10,8 @@ import {
   Calendar,
   MapPin,
   Globe,
-  ChevronRight,
   Repeat,
 } from "lucide-react";
-
-import { Fragment } from "react";
 
 import Typewriter from "@/components/Typewriter";
 import SpaceBackground from "@/components/SpaceBackground";
@@ -76,11 +73,13 @@ const projects = [
 
 const experiences = [
   {
-    company: "De La Salle University College of Computer Studies - Center for Language Technologies",
+    company:
+      "De La Salle University College of Computer Studies - Center for Language Technologies",
     role: "Natural Language Processing Intern",
     period: "June 2023 – July 2023",
     location: "Taft, Manila",
-    description: "Helped in data preparation and validation of chatbot projects, presented research on semantics, made Python scripts for easier data gathering and classification",
+    description:
+      "Helped in data preparation and validation of chatbot projects, presented research on semantics, made Python scripts for easier data gathering and classification",
     skills: ["DeepNote", "Jupyter", "Python", "RegEx"],
     color: "from-emerald-500 to-teal-600",
   },
@@ -98,7 +97,8 @@ const experiences = [
     role: "Frontend Developer Intern",
     period: "June 2026 – Present",
     location: "Remote",
-    description: "Developed responsive web applications for client projects. Contributed to the company component library.",
+    description:
+      "Developed responsive web applications for client projects. Contributed to the company component library.",
     skills: ["TypeScript", "Docker", "React", "Figma", "Next.js"],
     color: "from-purple-500 to-pink-600",
   },
@@ -110,6 +110,16 @@ const experiences = [
     description: "Identify and fix bug fixes, work on client projects",
     skills: ["Git", "Full Stack Development"],
     color: "from-orange-500 to-red-600",
+  },
+  {
+    company: "Computer Society of the Ateneo",
+    role: "Associate Vice President for Development",
+    period: "July 2026 - Present",
+    location: "Quezon City, PH",
+    description:
+      "Helped in data preparation and validation of chatbot projects, presented research on semantics, made Python scripts for easier data gathering and classification",
+    skills: ["Project Management", "Jupyter", "Python", "RegEx"],
+    color: "from-emerald-500 to-teal-600",
   },
 ];
 
