@@ -14,7 +14,7 @@
   --font-press-start-2p: var(--font-press-start-2p), sans-serif;
   --font-inter-sans: var(--font-inter-sans), sans-serif;
   --font-bebas-neue: var(--font-bebas-neue), sans-serif;
-  --font-space-grotesk: var(--font-space-grotesk)
+  --font-space-grotesk: var(--font-space-grotesk), sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
