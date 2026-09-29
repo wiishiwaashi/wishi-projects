@@ -269,7 +269,10 @@ function Hero() {
 
 function Projects() {
   return (
-    <section id="projects" className="min-h-screen py-20 px-8 backdrop-blur-none">
+    <section
+      id="projects"
+      className="min-h-screen py-20 px-8 backdrop-blur-none"
+    >
       <div className="max-w-6xl mx-auto">
         <FadeIn className="mb-16 text-center">
           <h2 className="text-5xl text-white pb-4 mb-4 font-space-grotesk font-bold">
@@ -283,9 +286,13 @@ function Projects() {
           {projects.map((p, i) => (
             <FadeIn key={p.title} delay={i * 100}>
               <div
-                className={`rounded-2xl overflow-hidden shadow-xl md:h-[350px] bg-gradient-to-r flex flex-col md:flex-row ${i % 2 !== 0 ? "md:flex-row-reverse" : ""} ${i % 2 !== 0 ? "from-slate-900 to-neutral-600" : "from-neutral-600 to-slate-900"}`}
+                className={`rounded-2xl overflow-hidden md:h-[350px] flex flex-col md:flex-row
+    bg-gradient-to-br from-white/15 to-white/5
+    backdrop-blur-xl border border-white/20
+    shadow-[0_8px_32px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.25)]
+    ${i % 2 !== 0 ? "md:flex-row-reverse" : ""}`}
               >
-                <div className="relative h-[250px] md:h-full w-full md:w-1/2 flex-none bg-black/10">
+                <div className="relative h-[250px] md:h-full w-full md:w-1/2 flex-none">
                   <Image
                     src={p.image}
                     alt={p.title}
@@ -314,13 +321,13 @@ function Projects() {
                   <div className="flex gap-4 pt-6">
                     <a
                       href={p.projectLink}
-                      className="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors text-sm"
+                      className="flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-sm px-4 py-2 rounded-lg transition-colors text-sm"
                     >
                       <ExternalLink className="w-4 h-4" /> Live Demo
                     </a>
                     <a
                       href="#"
-                      className="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-colors text-sm"
+                      className="flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-sm px-4 py-2 rounded-lg transition-colors text-sm"
                     >
                       <Globe className="w-4 h-4" /> Code
                     </a>
